@@ -2,11 +2,12 @@ const int sensorpin = 0;
 const int rpin = 13;
 const int gpin = 12;
 const int bpin = 11;
-int rval1,rval2,gval1,gval2,bval1,bval2;
+int rval2,gval2,bval2;
 float degCold;
 
 void setup() {
   // put your setup code here, to run once:
+  
   pinMode(rpin,OUTPUT);
   pinMode(gpin,OUTPUT);
   pinMode(bpin,OUTPUT);
@@ -27,34 +28,58 @@ void loop() {
   
  if (degCnew < 5) 
  {
+  rval2 = 255;
+  gval2 = 255;
+  bval2 = 255;
   //LED limit white
  }
   if (degCnew > 5 && degCnew <= 8) 
  {
+  rval2 = 200;
+  gval2 = 200;
+  bval2 = 255;
   //Led limit light blue
  }
   if (degCnew > 8 && degCnew <= 12) 
  {
+  rval2 = 0;
+  gval2 = 0;
+  bval2 = 255;
   //Led limit blue
  } 
   if (degCnew > 12 && degCnew <= 15) 
  {
+  rval2 = 0;
+  gval2 = 255;
+  bval2 = 255;
   //Led limit teal
  }
    if (degCnew > 15 && degCnew <= 18) 
  {
+  rval2 = 0;
+  gval2 = 255;
+  bval2 = 0;
   //Led limit green
  }
    if (degCnew > 18 && degCnew <= 21) 
  {
+  rval2 = 255;
+  gval2 = 255;
+  bval2 = 0;
   //Led limit yellow
  }
    if (degCnew > 21 && degCnew <= 24) 
  {
+  rval2 = 255;
+  gval2 = 155;
+  bval2 = 0;
   //Led limit orange
  }
    if (degCnew > 24) 
  {
+  rval2 = 255;
+  gval2 = 0;
+  bval2 = 0;
   //Led limit red
  }
   while (degCnew != degCold) 
