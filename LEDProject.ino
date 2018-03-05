@@ -25,13 +25,38 @@ void loop() {
 
   degCnew = (volts - 0.5) * 100.0;//calculates the temperature
   
-//  switch(degCnew) 
-//  {
-//    case 0:
-//    break;
-//    
-//  }
-  
+ if (degCnew < 5) 
+ {
+  //LED limit white
+ }
+  if (degCnew > 5 && degCnew <= 8) 
+ {
+  //Led limit light blue
+ }
+  if (degCnew > 8 && degCnew <= 12) 
+ {
+  //Led limit blue
+ } 
+  if (degCnew > 12 && degCnew <= 15) 
+ {
+  //Led limit teal
+ }
+   if (degCnew > 15 && degCnew <= 18) 
+ {
+  //Led limit green
+ }
+   if (degCnew > 18 && degCnew <= 21) 
+ {
+  //Led limit yellow
+ }
+   if (degCnew > 21 && degCnew <= 24) 
+ {
+  //Led limit orange
+ }
+   if (degCnew > 24) 
+ {
+  //Led limit red
+ }
   while (degCnew != degCold) 
   {
     if (degCnew > degCold)//if the new temperature is higher than the old one
