@@ -2,7 +2,8 @@ const int sensorpin = 0;
 const int rpin = 13;
 const int gpin = 12;
 const int bpin = 11;
-int; rval1,rval2,gval1,gval2,bval1,bval2;
+int rval1,rval2,gval1,gval2,bval1,bval2;
+float degCold;
 
 void setup() {
   // put your setup code here, to run once:
@@ -19,10 +20,18 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  float volts,degCnew,degCold;
+  float volts,degCnew;
   volts = getVoltage(sensorpin);
 
   degCnew = (volts - 0.5) * 100.0;//calculates the temperature
+  
+//  switch(degCnew) 
+//  {
+//    case 0:
+//    break;
+//    
+//  }
+  
   while (degCnew != degCold) 
   {
     if (degCnew > degCold)//if the new temperature is higher than the old one
