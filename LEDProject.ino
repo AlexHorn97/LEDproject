@@ -2,7 +2,8 @@ const int sensorpin = A0;
 const int rpin = 10;
 const int gpin = 9;
 const int bpin = 8;
-int rval2, gval2, bval2, rval1, gval1, bval1;
+int rval2, gval2, bval2, rval1, gval1, bval1, tempRoundNew, tempRoundOld;
+int tempBrackNew, tempBrackOld,tempBracket;
 float degCold;
 
 void setup() {
@@ -13,152 +14,90 @@ void setup() {
   //pinMode(rpin,OUTPUT);
   //pinMode(gpin,OUTPUT);
   //pinMode(bpin,OUTPUT);
-  degCold = 5;
+  degCold = 0;
+  tempBrackOld = 0;
 
   Serial.begin(9600);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  analogWrite(rpin, rval1);
-  analogWrite(gpin, gval1);
-  analogWrite(bpin, bval1);
+  tempRoundOld  = round(degCold);
+  tempBrackOld = tempBracketTest(tempRoundOld);
+  Serial.print("tempRoundOld ");
+  Serial.println(tempRoundOld);
+//  analogWrite(rpin, rval1);
+//  analogWrite(gpin, gval1);
+//  analogWrite(bpin, bval1);//lights the LED
+  
   float volts, degCnew;
   volts = analogRead(sensorpin) * 0.004882814;
   //degCnew = 6;
   degCnew = (volts  - .5) * 100; //calculates the temperature
+  Serial.print("degCnew ");
   Serial.println(degCnew);
-  if (degCnew < 5.0)
-  {
-    rval2 = 255;
-    gval2 = 255;
-    bval2 = 255;
-    //LED limit white
-  }
-  if (degCnew > 5.0 && degCnew <= 8.0)
-  {
-    rval2 = 200;
-    gval2 = 200;
-    bval2 = 255;
-    //Led limit light blue
-  }
-  if (degCnew > 8.0 && degCnew <= 12.0)
-  {
-    rval2 = 0;
-    gval2 = 0;
-    bval2 = 255;
-    //Led limit blue
-  }
-  if (degCnew > 12.0 && degCnew <= 15.0)
-  {
-    rval2 = 0;
-    gval2 = 255;
-    bval2 = 255;
-    //Led limit teal
-  }
-  if (degCnew > 15.0 && degCnew <= 18.0)
-  {
-    rval2 = 0;
-    gval2 = 255;
-    bval2 = 0;
-    //Led limit green
-  }
-  if (degCnew > 18.0 && degCnew <= 21.0)
-  {
-    rval2 = 255;
-    gval2 = 255;
-    bval2 = 0;
-    //Led limit yellow
-  }
-  if (degCnew > 21.0 && degCnew <= 24.0)
-  {
-    rval2 = 255;
-    gval2 = 155;
-    bval2 = 0;
-    //Led limit orange
-  }
-  if (degCnew > 24.0)
-  {
-    rval2 = 255;
-    gval2 = 0;
-    bval2 = 0;
-    //Led limit red
-  }
 
-  if (degCnew != degCold)
-  {
-    if (degCnew > degCold)//if the new temperature is higher than the old one
-    {
-      while (rval1 != rval2 || gval1 != gval2 || bval1 != bval2) {
-        if (rval1 > rval2) //red fade
-        {
-          rval1 = rval1 - 5;
-          
-
-        }
-        if (gval1 > rval2) //green fade
-        {
-          gval1 = gval1 - 5;
-
-          
-
-        }
-        if (bval1 > bval2) //blue fade
-        {
-          bval1 = bval1 - 5;
-
-          
-        }
-        if (rval1 < rval2) //red fade
-        {
-          rval1 = rval1 + 5;
-          
-
-        }
-        if (gval1 < rval2) //green fade
-        {
-          gval1 = gval1 + 5;
-
-          
-
-        }
-        if (bval1 < bval2) //blue fade
-        {
-          bval1 = bval1 + 5;
-
-          
-        }
-      }
-      Serial.print(rval1);
-      Serial.print(gval1);
-      Serial.println(bval1);
-      analogWrite(rpin, rval1);
-      analogWrite(gpin, gval1);
-      analogWrite(bpin, bval1);
-      delay(100);
-    }
-    //    if (degCnew < degCold)//if the new temperature is lower than the old one
-    //    {
-    //            while(rval1 != rval2)//red fade
-    //      {
-    //        rval1 + 5;
-    //
-    //      }
-    //      while(gval1 != rval2)//green fade
-    //      {
-    //        gval1 + 5;
-    //
-    //      }
-    //      while(bval1 != bval2)//blue fade
-    //      {
-    //        bval1 + 5;
-    //
-    //      }
-    //    }
-  }
-
+  
+  tempRoundNew = round(degCnew); //converts temp to int
+  Serial.print("tempRoundNew ");
+  Serial.println(tempRoundNew);
+  tempBrackNew = tempBracketTest(tempRoundNew);
+  Serial.print("tempBrackNew ");
+  Serial.println(tempBrackNew);
+  
   degCold = degCnew;
   delay(1000);
+}
+int tempBracketTest(int temp)
+{
+  switch (temp)
+  {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4: //for temperature 0 to 4
+      tempBracket = 0;
+      break;
+    case 5:
+    case 6:
+    case 7://for temperature 5 to 7
+      tempBracket = 1;
+      break;
+    case 8:
+    case 9:
+    case 10://for temperature 8 to 10
+      tempBracket = 2;
+      break;
+    case 11:
+    case 12:
+    case 13://for temperature 11 to 13
+      tempBracket = 3;
+      break;
+    case 14:
+    case 15:
+    case 16: //for temperature 14 to 16
+      tempBracket = 4;
+      break;
+    case 17:
+    case 18:
+    case 19: //for temperature 17 to 19
+      tempBracket = 5;
+      break;
+    case 20:
+    case 21:
+    case 22: //for temperature 20 to 22
+      tempBracket = 6;
+      break;
+    case 23:
+    case 24:
+    case 25://for temperature 23 to 25
+      tempBracket = 7;
+      break;
+    default:
+      tempBracket = 8;
+      break;
+  }
 }
 
 
