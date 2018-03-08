@@ -2,18 +2,13 @@ const int sensorpin = A0;
 const int rpin = 10;
 const int gpin = 9;
 const int bpin = 8;
-int rval2, gval2, bval2, rval1, gval1, bval1, tempRoundNew, tempRoundOld;
+int  rval1, gval1, bval1,rdiff,gdiff,bdiff, tempRoundNew, tempRoundOld;
 int tempBrackNew, tempBrackOld,tempBracket;
 float degCold;
 
 void setup() {
   // put your setup code here, to run once:
-  rval1 = 255;
-  gval1 = 255;
-  bval1 = 255;
-  //pinMode(rpin,OUTPUT);
-  //pinMode(gpin,OUTPUT);
-  //pinMode(bpin,OUTPUT);
+
   degCold = 0;
   tempBrackOld = 0;
 
@@ -48,8 +43,8 @@ void loop() {
   degCold = degCnew;
   delay(1000);
 }
-int tempBracketTest(int temp)
-{
+
+int tempBracketTest(int temp){
   switch (temp)
   {
     case 0:
@@ -99,5 +94,39 @@ int tempBracketTest(int temp)
       break;
   }
 }
+void wtlb()
+{
+  rval1 = 255;
+  gval1 = 255;
+  bval1 = 255;
+  rdiff = 75;
+  gdiff = 55;
+  bdiff = 0;
+
+  
+  for(int i = 0; i < 30; i++)//loops 30 times
+  {
+    rval1 = rval - (rdiff / 30);
+    delay(1000);
+  }
+    
+}//fades from white to light blue
+void lbtb(){}//fades from light blue to blue
+void btt(){}//fades from blue to teal
+void ttg(){}//fades from teal to green
+void gty(){}//fades from green to yellow
+void yto(){}//fades from yellow to orange
+void otr(){}//fades from orange to red
+void rtp(){}//fades from red to purple
+
+void ptr(){}//fades from purple to red
+void rto(){}//fades from red to orange
+void oty(){}//fades from orange to yellow
+void ytg(){}//fades from yellow to green
+void gtt(){}//fades from green to teal
+void ttb(){}//fades from teal to blue
+void btlb(){}//fades from blue to light blue
+void lbtw(){}//fades from light blue to white
+
 
 
