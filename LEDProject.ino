@@ -33,18 +33,38 @@ void loop() {
   {
     rval = 255;
     gval = 0;
-    bval = 0;    
+    bval = 0;
   }
-  //if the temperature is lower than 20 and higher than 15, set the color to yellow
-  //if the temperature is lower than 15 and higher than 10, set the color to green
-  //if the temperature is lower than 10 and higher than 5, set the color to blue
-  //if the temperature is lower than 5, set the color to white
+  if (degC < 20.00 && degC > 15.00) //if the temperature is lower than 20 and higher than 15, set the color to yellow
+  {
+    rval = 255;
+    gval = 50;
+    bval = 0;
+  }
+  if (degC < 15.00 && degC > 10.00)//if the temperature is lower than 15 and higher than 10, set the color to green
+  {
+    rval = 0;
+    gval = 255;
+    bval = 0;
+  }
+  if (degC < 10.00 && degC > 5.00)//if the temperature is lower than 10 and higher than 5, set the color to blue
+  {
+    rval = 0;
+    gval = 0;
+    bval = 255;
+  }
 
+  if (degC < 10.00 && degC > 5.00)//if the temperature is lower than 5, set the color to white
+  {
+    rval = 255;
+    gval = 255;
+    bval = 255;
+  }
   analogWrite(rpin, rval); //writes colour values to LED at end of loop
   analogWrite(gpin, gval);
   analogWrite(bpin, bval);
 
-  delay(10000);//waits 10 seconds until running the program again
+  delay(5000);//waits 10 seconds until running the program again
 }
 
 
