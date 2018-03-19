@@ -1,7 +1,11 @@
+/*
+ * Written by Alex Horn
+ */
+
 const int sensorpin = A0;
 const int rpin = 10;
 const int gpin = 9;
-const int bpin = 8;
+const int bpin = 11;
 int  rval, gval, bval;
 float degCold;
 
@@ -17,8 +21,8 @@ void loop() {
   // put your main code here, to run repeatedly:
 
   float volts, degC;
-  volts = analogRead(sensorpin) * 0.004882814;
-  //degC = 6;
+  volts = analogRead(sensorpin) * 0.004882814;//reads the voltage from the temperature sensor
+  
   degC = (volts  - .5) * 100; //calculates the temperature
   Serial.print("degC ");
   Serial.println(degC);
@@ -27,7 +31,7 @@ void loop() {
   {
     rval = 255;
     gval = 0;
-    bval = 255;
+    bval = 140;
   }
   if (degC < 25.00 && degC > 20.00) //if the temperature is lower than 25 and higher than 20, set the color to red
   {
@@ -64,7 +68,7 @@ void loop() {
   analogWrite(gpin, gval);
   analogWrite(bpin, bval);
 
-  delay(5000);//waits 10 seconds until running the program again
+  delay(5000);//waits 5 seconds until running the program again
 }
 
 
